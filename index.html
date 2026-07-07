@@ -1,51 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GITAM Event Scanner</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://unpkg.com/html5-qrcode" defer></script>
+    <script src="script.js" defer></script>
+
+</head>
+
+<body>
+
 <div class="container">
 
-<h1>🎓 GITAM Event Scanner</h1>
+    <h1>🎓 GITAM Event Scanner</h1>
 
-<div id="login-section">
+    <div id="login-section">
 
-<h2>Organizer Login</h2>
+        <h2>Organizer Login</h2>
 
-<input
-type="text"
-id="username"
-placeholder="Username">
+        <input
+            type="text"
+            id="username"
+            placeholder="Username">
 
-<input
-type="password"
-id="password"
-placeholder="Password">
+        <input
+            type="password"
+            id="password"
+            placeholder="Password">
 
-<button id="login-btn">
+        <button id="login-btn">
 
-Login
+            Login
 
-</button>
+        </button>
+
+        <div id="login-message"></div>
+
+    </div>
+
+    <div id="scanner-section" style="display:none;">
+
+        <h2 id="welcome"></h2>
+
+        <select id="event">
+
+            <option value="">Select Event</option>
+
+        </select>
+
+        <br><br>
+
+        <button id="start-btn">
+
+            Start Scanner
+
+        </button>
+
+        <div id="reader"></div>
+
+        <div id="result">
+
+            Waiting to scan...
+
+        </div>
+
+    </div>
 
 </div>
 
-<div id="scanner-section" style="display:none;">
+</body>
 
-<h2 id="welcome"></h2>
-
-<select id="event"></select>
-
-<br><br>
-
-<button id="start-btn">
-
-Start Scanner
-
-</button>
-
-<div id="reader"></div>
-
-<div id="result">
-
-Waiting to scan...
-
-</div>
-
-</div>
-
-</div>
+</html>
