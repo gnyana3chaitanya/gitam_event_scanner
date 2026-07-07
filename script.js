@@ -1,60 +1,99 @@
-alert("script loaded");
 const LOGIN_WEBHOOK = "https://chaitu1.app.n8n.cloud/webhook-test/organizer-login";
-const loginButton = document.getElementById("login-btn");
 
-const usernameInput = document.getElementById("username");
+document.addEventListener("DOMContentLoaded", () => {
 
-const passwordInput = document.getElementById("password");
-loginButton.addEventListener("click", async () => {
+    console.log("Script Loaded");
 
-    const username = usernameInput.value;
+    const loginButton = document.getElementById("login-btn");
 
-    const password = passwordInput.value;
+    const usernameInput = document.getElementById("username");
 
-    console.log(username);
+    const passwordInput = document.getElementById("password");
 
-    console.log(password);
+    const loginMessage = document.getElementById("login-message");
 
-});
-const button = document.getElementById("start-btn");
+    const loginSection = document.getElementById("login-section");
 
-const result = document.getElementById("result");
+    const scannerSection = document.getElementById("scanner-section");
 
-button.addEventListener("click", () => {
+    const welcome = document.getElementById("welcome");
 
-    const html5QrCode = new Html5Qrcode("reader");
+    loginButton.addEventListener("click", async () => {
 
-    html5QrCode.start(
+        const username = usernameInput.value.trim();
 
-        {
-            facingMode: "environment"
-        },
+        const password = passwordInput.value.trim();
 
-        {
-            fps: 10,
-            qrbox: 250
-        },
+        if(username === "" || password === ""){
 
-        (decodedText) => {
+            loginMessage.innerHTML = "Please enter username and password.";
 
-            result.innerHTML =
+            loginMessage.style.color = "red";
 
-            `
-            <h2>✅ QR Detected</h2>
-
-            <p>${decodedText}</p>
-            `;
-
-            html5QrCode.stop();
-
-        },
-
-        (errorMessage) => {
-
-            // Ignore scan errors
+            return;
 
         }
 
-    );
+        loginMessage.innerHTML = "Logging in...";
+
+        loginMessage.style.color = "blue";
+
+        try{
+
+            const response = await fetch(LOGIN_WEBHOOK,{
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify({
+
+                    username:username,
+
+                    password:password
+
+                })
+
+            });
+
+            const data = await response.json();
+
+            console.log(data);
+
+            if(data.success){
+
+                loginMessage.innerHTML="";
+
+                loginSection.style.display="none";
+
+                scannerSection.style.display="block";
+
+                welcome.innerHTML=`Welcome ${data.organizer_name}`;
+
+            }else{
+
+                loginMessage.innerHTML=data.message;
+
+                loginMessage.style.color="red";
+
+            }
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            loginMessage.innerHTML="Unable to connect to server.";
+
+            loginMessage.style.color="red";
+
+        }
+
+    });
 
 });
