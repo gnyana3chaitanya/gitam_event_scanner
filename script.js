@@ -1,3 +1,4 @@
+alert("script loaded");
 const LOGIN_WEBHOOK = "https://chaitu1.app.n8n.cloud/webhook-test/organizer-login";
 const loginButton = document.getElementById("login-btn");
 
