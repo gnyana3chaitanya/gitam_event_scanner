@@ -77,3 +77,20 @@ button:hover{
     word-wrap:break-word;
 
 }
+input{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:15px;
+
+font-size:18px;
+
+border-radius:8px;
+
+border:1px solid #ccc;
+
+box-sizing:border-box;
+
+}
