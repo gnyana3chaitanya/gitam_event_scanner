@@ -1,43 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="container">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<h1>🎓 GITAM Event Scanner</h1>
 
-    <title>GITAM Event Scanner</title>
+<div id="login-section">
 
-    <link rel="stylesheet" href="style.css">
+<h2>Organizer Login</h2>
 
-    <!-- QR Scanner Library -->
-    <script src="https://unpkg.com/html5-qrcode" defer></script>
+<input
+type="text"
+id="username"
+placeholder="Username">
 
-    <script src="script.js" defer></script>
+<input
+type="password"
+id="password"
+placeholder="Password">
 
-</head>
+<button id="login-btn">
 
-<body>
+Login
 
-    <div class="container">
+</button>
 
-        <h1>🎓 GITAM Event Scanner</h1>
+</div>
 
-        <p>Scan the student's QR Code</p>
+<div id="scanner-section" style="display:none;">
 
-        <button id="start-btn">
-            Start Scanner
-        </button>
+<h2 id="welcome"></h2>
 
-        <div id="reader"></div>
+<select id="event"></select>
 
-        <div id="result">
+<br><br>
 
-            Waiting to scan...
+<button id="start-btn">
 
-        </div>
+Start Scanner
 
-    </div>
+</button>
 
-</body>
+<div id="reader"></div>
 
-</html>
+<div id="result">
+
+Waiting to scan...
+
+</div>
+
+</div>
+
+</div>
