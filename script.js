@@ -64,17 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             console.log(data);
 
-            if(data.success){
+          if(data.success){
 
-                loginMessage.innerHTML="";
+    sessionStorage.setItem(
+        "organizer",
+        JSON.stringify(data)
+    );
 
-                loginSection.style.display="none";
+    window.location.href = "/dashboard.html";
 
-                scannerSection.style.display="block";
-
-                welcome.innerHTML=`Welcome ${data.organizer_name}`;
-
-            }else{
+}else{
 
                 loginMessage.innerHTML=data.message;
 
