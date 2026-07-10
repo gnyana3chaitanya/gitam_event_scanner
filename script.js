@@ -1,4 +1,4 @@
-const LOGIN_WEBHOOK = "https://chaitu1.app.n8n.cloud/webhook-test/organizer-login";
+const LOGIN_WEBHOOK = "https://chaitu1.app.n8n.cloud/webhook/organizer-login";
 
 document.addEventListener("DOMContentLoaded", () => {
 
