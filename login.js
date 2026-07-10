@@ -3,7 +3,7 @@
    Version 1.0
 ========================================== */
 
-const LOGIN_API = "https://chaitu1.app.n8n.cloud/webhook-test/organizer-login";
+const LOGIN_API = "https://chaitu1.app.n8n.cloud/webhook/organizer-login";
 
 const loginButton = document.getElementById("loginBtn");
 const usernameInput = document.getElementById("username");
