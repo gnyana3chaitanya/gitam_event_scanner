@@ -15,12 +15,176 @@
 
 <body>
 
-<h1>Organizer Dashboard</h1>
+    <!-- Navbar -->
+
+    <div class="navbar">
+
+        <div class="container nav-content">
+
+            <div class="logo">
+
+                🎓 GITAM Event Management
+
+            </div>
+
+            <div class="profile">
+
+                <h5 id="organizerName">Organizer</h5>
+
+                <p id="organizerRole">Role</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard -->
+
+    <div class="container dashboard">
+
+        <h2 class="section-title">
+
+            Welcome <span id="welcomeName">Organizer</span> 👋
+
+        </h2>
+
+        <!-- Event Selection -->
+
+        <div class="card">
+
+            <h3>My Events</h3>
+
+            <select id="eventDropdown">
+
+                <option value="">Select an Event</option>
+
+            </select>
+
+        </div>
+
+        <!-- Event Details -->
+
+        <div class="card">
+
+            <h3>Event Details</h3>
+
+            <div class="details-grid">
+
+                <div class="detail">
+
+                    <small>Event Name</small>
+
+                    <h5 id="eventName">-</h5>
+
+                </div>
+
+                <div class="detail">
+
+                    <small>Date</small>
+
+                    <h5 id="eventDate">-</h5>
+
+                </div>
+
+                <div class="detail">
+
+                    <small>Venue</small>
+
+                    <h5 id="eventVenue">-</h5>
+
+                </div>
+
+                <div class="detail">
+
+                    <small>Registration Fee</small>
+
+                    <h5 id="eventFee">-</h5>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <p>Registered</p>
+
+                <h2 id="registeredCount">0</h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <p>Checked In</p>
+
+                <h2 id="checkedInCount">0</h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <p>Checked Out</p>
+
+                <h2 id="checkedOutCount">0</h2>
+
+            </div>
+
+            <div class="stat-card">
+
+                <p>Certificates</p>
+
+                <h2 id="certificateCount">0</h2>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="actions">
+
+            <button class="action-btn green" id="scannerBtn">
+
+                📷 Start Scanner
+
+            </button>
+
+            <button class="action-btn blue" id="registrationsBtn">
+
+                📋 Registrations
+
+            </button>
+
+            <button class="action-btn orange" id="reportsBtn">
+
+                📊 Reports
+
+            </button>
+
+            <button class="action-btn purple" id="certificateBtn">
+
+                🏆 Certificates
+
+            </button>
+
+            <button class="action-btn red" id="logoutBtn">
+
+                🚪 Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="dashboard.js"></script>
 
 </body>
-
-<script src="api.js"></script>
-
-<script src="dashboard.js"></script>
 
 </html>
