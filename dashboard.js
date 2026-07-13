@@ -1,68 +1,34 @@
-/* ==========================================
-   GITAM Event Management System
-   Version 1.0
-========================================== */
+document.addEventListener("DOMContentLoaded", loadDashboard);
 
-// Check Login Session
+async function loadDashboard() {
 
-const organizer = JSON.parse(sessionStorage.getItem("organizer"));
+    const organizer = JSON.parse(sessionStorage.getItem("organizer"));
 
-if (!organizer) {
+    if (!organizer) {
+        window.location.href = "index.html";
+        return;
+    }
 
-    window.location.href = "index.html";
+    try {
+
+        const response = await fetch(DASHBOARD_API, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                organizer_id: organizer.organizer_id
+            })
+        });
+
+        const result = await response.json();
+
+        console.log(result);
+
+    } catch (err) {
+
+        console.error(err);
+
+    }
 
 }
-
-// Load Organizer Details
-
-document.getElementById("organizerName").innerText =
-    organizer.organizer_name;
-
-document.getElementById("organizerRole").innerText =
-    organizer.role;
-
-document.getElementById("welcomeName").innerText =
-    organizer.organizer_name;
-
-// Logout
-
-document.getElementById("logoutBtn").addEventListener("click", () => {
-
-    const confirmLogout = confirm("Do you want to logout?");
-
-    if (!confirmLogout) return;
-
-    sessionStorage.clear();
-
-    window.location.href = "index.html";
-
-});
-
-// ----------------------------
-// Temporary Button Actions
-// (These will be connected later)
-// ----------------------------
-
-document.getElementById("scannerBtn").addEventListener("click", () => {
-
-    alert("Scanner Module - Coming in Sprint 3");
-
-});
-
-document.getElementById("registrationsBtn").addEventListener("click", () => {
-
-    alert("Registrations Module - Coming in Sprint 4");
-
-});
-
-document.getElementById("reportsBtn").addEventListener("click", () => {
-
-    alert("Reports Module - Coming in Sprint 5");
-
-});
-
-document.getElementById("certificateBtn").addEventListener("click", () => {
-
-    alert("Certificates Module - Coming in Sprint 6");
-
-});
