@@ -322,3 +322,46 @@ function logout() {
     window.location.href = "index.html";
 
 }
+async function loadStatistics(eventId){
+
+    try{
+
+        const response = await fetch(DASHBOARD_STATS_API,{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+
+                event_id:eventId
+
+            })
+
+        });
+
+        const data = await response.json();
+
+        document.getElementById("registeredCount").innerText =
+        data.registered;
+
+        document.getElementById("checkedInCount").innerText =
+        data.checkedIn;
+
+        document.getElementById("checkedOutCount").innerText =
+        data.checkedOut;
+
+        document.getElementById("certificateCount").innerText =
+        data.certificates;
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
