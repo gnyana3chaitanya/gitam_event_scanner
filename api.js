@@ -9,3 +9,7 @@ const LOGIN_API =
 // Dashboard API
 const DASHBOARD_API =
 "https://chaitu1.app.n8n.cloud/webhook-test/dashboard";
+
+// Dashboard Statistics API
+const DASHBOARD_STATS_API =
+"https://chaitu1.app.n8n.cloud/webhook-test/statistics";
