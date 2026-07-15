@@ -1,7 +1,7 @@
 // ===========================================
 // GITAM Event Management System
 // dashboard.js
-// Version 1.0
+// Version 1.1
 // ===========================================
 
 document.addEventListener("DOMContentLoaded", initializeDashboard);
@@ -21,7 +21,6 @@ async function initializeDashboard() {
     if (!organizer) {
 
         window.location.href = "index.html";
-
         return;
 
     }
@@ -52,36 +51,30 @@ function loadOrganizerDetails() {
 }
 
 // ===========================================
-// DASHBOARD API
+// LOAD DASHBOARD
 // ===========================================
 
 async function loadDashboard() {
 
     try {
 
-        const response = await fetch(
+        const response = await fetch(DASHBOARD_API, {
 
-            DASHBOARD_API,
+            method: "POST",
 
-            {
+            headers: {
 
-                method: "POST",
+                "Content-Type": "application/json"
 
-                headers: {
+            },
 
-                    "Content-Type": "application/json"
+            body: JSON.stringify({
 
-                },
+                organizer_id: organizer.organizer_id
 
-                body: JSON.stringify({
+            })
 
-                    organizer_id: organizer.organizer_id
-
-                })
-
-            }
-
-        );
+        });
 
         if (!response.ok) {
 
@@ -90,8 +83,6 @@ async function loadDashboard() {
         }
 
         dashboardData = await response.json();
-
-        console.log(dashboardData);
 
         if (!dashboardData.success) {
 
@@ -110,6 +101,67 @@ async function loadDashboard() {
         console.error(error);
 
         alert("Unable to connect to Dashboard API.");
+
+    }
+
+}
+
+// ===========================================
+// LOAD STATISTICS
+// ===========================================
+
+async function loadStatistics(eventId) {
+
+    try {
+
+        const response = await fetch(DASHBOARD_STATS_API, {
+
+            method: "POST",
+
+            headers: {
+
+                "Content-Type": "application/json"
+
+            },
+
+            body: JSON.stringify({
+
+                event_id: eventId
+
+            })
+
+        });
+
+        if (!response.ok) {
+
+            throw new Error("Statistics API Error");
+
+        }
+
+        const data = await response.json();
+
+        document.getElementById("registeredCount").innerText =
+            data.registered;
+
+        document.getElementById("checkedInCount").innerText =
+            data.checkedIn;
+
+        document.getElementById("checkedOutCount").innerText =
+            data.checkedOut;
+
+        document.getElementById("certificateCount").innerText =
+            data.certificates;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById("registeredCount").innerText = "-";
+        document.getElementById("checkedInCount").innerText = "-";
+        document.getElementById("checkedOutCount").innerText = "-";
+        document.getElementById("certificateCount").innerText = "-";
 
     }
 
@@ -178,17 +230,9 @@ function displayEvent(event) {
     document.getElementById("eventFee").innerText =
         event.registration_fee;
 
-    // Temporary Statistics
+    loadStatistics(event.event_id);
 
-    document.getElementById("registeredCount").innerText = "0";
-
-    document.getElementById("checkedInCount").innerText = "0";
-
-    document.getElementById("checkedOutCount").innerText = "0";
-
-    document.getElementById("certificateCount").innerText = "0";
 }
-
 // ===========================================
 // REGISTER BUTTON EVENTS
 // ===========================================
@@ -218,84 +262,84 @@ function registerButtonEvents() {
 }
 
 // ===========================================
-// SCANNER
+// OPEN SCANNER
 // ===========================================
 
 function openScanner() {
 
     if (!selectedEvent) {
 
-        alert("Please select an event.");
+        alert("Please select an event first.");
 
         return;
 
     }
 
     alert(
-        "Scanner Module\n\nSelected Event:\n" +
+        "Scanner Module\n\nSelected Event:\n\n" +
         selectedEvent.event_name
     );
 
 }
 
 // ===========================================
-// REGISTRATIONS
+// OPEN REGISTRATIONS
 // ===========================================
 
 function openRegistrations() {
 
     if (!selectedEvent) {
 
-        alert("Please select an event.");
+        alert("Please select an event first.");
 
         return;
 
     }
 
     alert(
-        "Registrations Module\n\nSelected Event:\n" +
+        "Registrations Module\n\nSelected Event:\n\n" +
         selectedEvent.event_name
     );
 
 }
 
 // ===========================================
-// REPORTS
+// OPEN REPORTS
 // ===========================================
 
 function openReports() {
 
     if (!selectedEvent) {
 
-        alert("Please select an event.");
+        alert("Please select an event first.");
 
         return;
 
     }
 
     alert(
-        "Reports Module\n\nSelected Event:\n" +
+        "Reports Module\n\nSelected Event:\n\n" +
         selectedEvent.event_name
     );
 
 }
 
 // ===========================================
-// CERTIFICATES
+// OPEN CERTIFICATES
 // ===========================================
 
 function openCertificates() {
 
     if (!selectedEvent) {
 
-        alert("Please select an event.");
+        alert("Please select an event first.");
 
         return;
 
     }
 
     alert(
-        "Certificates Module\n\nSelected Event:\n" +
+        "Certificates Module\n\nSelected Event:\n\n" +
         selectedEvent.event_name
     );
 
@@ -320,48 +364,5 @@ function logout() {
     sessionStorage.clear();
 
     window.location.href = "index.html";
-
-}
-async function loadStatistics(eventId){
-
-    try{
-
-        const response = await fetch(DASHBOARD_STATS_API,{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-
-                event_id:eventId
-
-            })
-
-        });
-
-        const data = await response.json();
-
-        document.getElementById("registeredCount").innerText =
-        data.registered;
-
-        document.getElementById("checkedInCount").innerText =
-        data.checkedIn;
-
-        document.getElementById("checkedOutCount").innerText =
-        data.checkedOut;
-
-        document.getElementById("certificateCount").innerText =
-        data.certificates;
-
-    }
-
-    catch(error){
-
-        console.error(error);
-
-    }
 
 }
